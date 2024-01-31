@@ -334,11 +334,17 @@ def run():
     args.model_name_or_path = r"H:\research\clone\examples\codet5-base"
 
 
-    config = RobertaConfig.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
+    # config = RobertaConfig.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
+    #
+    # config.num_labels = 1
+    # tokenizer = RobertaTokenizer.from_pretrained(args.tokenizer_name)
+    # model = T5ForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
+
+    config = RobertaConfig.from_pretrained("Salesforce/codet5-base")
 
     config.num_labels = 1
-    tokenizer = RobertaTokenizer.from_pretrained(args.tokenizer_name)
-    model = T5ForConditionalGeneration.from_pretrained(args.model_name_or_path, config=config)
+    tokenizer = RobertaTokenizer.from_pretrained("Salesforce/codet5-base")
+    model = T5ForConditionalGeneration.from_pretrained("Salesforce/codet5-base", config=config)
 
     model=T5CloneModel(model, config, tokenizer,args)
     logger.info("Training/evaluation parameters %s", args)
