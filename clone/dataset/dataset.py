@@ -16,12 +16,12 @@ from dataset.parser import (remove_comments_and_docstrings,
                           index_to_code_token)
 
 dfg_function={
-    'python':DFG_python,
+    # 'python':DFG_python,
     'java':DFG_java,
-    'ruby':DFG_ruby,
-    'go':DFG_go,
-    'php':DFG_php,
-    'javascript':DFG_javascript
+    # 'ruby':DFG_ruby,
+    # 'go':DFG_go,
+    # 'php':DFG_php,
+    # 'javascript':DFG_javascript
 }
 
 # load parsers
