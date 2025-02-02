@@ -228,36 +228,36 @@ def run():
     parser = argparse.ArgumentParser()
 
     ## Required parameters
-    parser.add_argument("--train_data_file", default=None, type=str, required=True,
+    parser.add_argument("--train_data_file", default="dataset/dataset/train.txt", type=str, required=True,
                         help="The input training data file (a text file).")
-    parser.add_argument("--output_dir", default=None, type=str, required=True,
+    parser.add_argument("--output_dir", default="saved_models", type=str, required=True,
                         help="The output directory where the model predictions and checkpoints will be written.")
 
     ## Other parameters
-    parser.add_argument("--eval_data_file", default=None, type=str,
+    parser.add_argument("--eval_data_file", default="dataset/dataset/valid.txt", type=str,
                         help="An optional input evaluation data file to evaluate the perplexity on (a text file).")
-    parser.add_argument("--test_data_file", default=None, type=str,
+    parser.add_argument("--test_data_file", default="dataset/dataset/test.txt", type=str,
                         help="An optional input evaluation data file to evaluate the perplexity on (a text file).")
 
-    parser.add_argument("--model_name_or_path", default=None, type=str,
+    parser.add_argument("--model_name_or_path", default="microsoft/graphcodebert-base", type=str,
                         help="The model checkpoint for weights initialization.")
 
-    parser.add_argument("--config_name", default="", type=str,
+    parser.add_argument("--config_name", default="microsoft/graphcodebert-base", type=str,
                         help="Optional pretrained config name or path if not the same as model_name_or_path")
-    parser.add_argument("--tokenizer_name", default="", type=str,
+    parser.add_argument("--tokenizer_name", default="microsoft/graphcodebert-base", type=str,
                         help="Optional pretrained tokenizer name or path if not the same as model_name_or_path")
 
-    parser.add_argument("--code_length", default=256, type=int,
+    parser.add_argument("--code_length", default=512, type=int,
                         help="Optional Code input sequence length after tokenization.")
-    parser.add_argument("--data_flow_length", default=64, type=int,
+    parser.add_argument("--data_flow_length", default=128, type=int,
                         help="Optional Data Flow input sequence length after tokenization.")
-    parser.add_argument("--do_train", action='store_true',
+    parser.add_argument("--do_train", action='store_true', default=True,
                         help="Whether to run training.")
-    parser.add_argument("--do_eval", action='store_true',
+    parser.add_argument("--do_eval", action='store_true', default=True,
                         help="Whether to run eval on the dev set.")
-    parser.add_argument("--do_test", action='store_true',
+    parser.add_argument("--do_test", action='store_true', default=True,
                         help="Whether to run eval on the dev set.")
-    parser.add_argument("--evaluate_during_training", action='store_true',
+    parser.add_argument("--evaluate_during_training", action='store_true', default=True,
                         help="Run evaluation during training at each logging step.")
 
     parser.add_argument("--train_batch_size", default=4, type=int,
@@ -266,7 +266,7 @@ def run():
                         help="Batch size per GPU/CPU for evaluation.")
     parser.add_argument('--gradient_accumulation_steps', type=int, default=1,
                         help="Number of updates steps to accumulate before performing a backward/update pass.")
-    parser.add_argument("--learning_rate", default=5e-5, type=float,
+    parser.add_argument("--learning_rate", default=2e-5, type=float,
                         help="The initial learning rate for Adam.")
     parser.add_argument("--weight_decay", default=0.0, type=float,
                         help="Weight deay if we apply some.")
@@ -281,7 +281,7 @@ def run():
 
     parser.add_argument('--seed', type=int, default=42,
                         help="random seed for initialization")
-    parser.add_argument('--epochs', type=int, default=1,
+    parser.add_argument('--epochs', type=int, default=10,
                         help="training epochs")
 
     args = parser.parse_args()
