@@ -8,7 +8,7 @@ nohup python run_graphbert.py \
     --train_data_file=dataset/dataset/train.txt \
     --eval_data_file=dataset/dataset/valid.txt \
     --test_data_file=dataset/dataset/test.txt \
-    --epoch 5 \
+    --epoch 1 \
     --code_length 512 \
     --data_flow_length 128 \
     --train_batch_size 16 \
