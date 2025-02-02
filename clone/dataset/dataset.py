@@ -116,7 +116,7 @@ def extract_dataflow(code, parser,lang):
     #obtain dataflow
     if lang=="php":
         code="<?php"+code+"?>"
-    try:
+    # try:
         tree = parser[0].parse(bytes(code,'utf8'))
         root_node = tree.root_node
         tokens_index=tree_to_token_index(root_node)
@@ -141,9 +141,9 @@ def extract_dataflow(code, parser,lang):
             if d[1] in indexs:
                 new_DFG.append(d)
         dfg=new_DFG
-    except Exception as e:
-        print(e)
-        dfg=[]
+    # except Exception as e:
+    #     print(e)
+    #     dfg=[]
     return code_tokens,dfg
 
 
