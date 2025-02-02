@@ -141,7 +141,8 @@ def extract_dataflow(code, parser,lang):
             if d[1] in indexs:
                 new_DFG.append(d)
         dfg=new_DFG
-    except:
+    except Exception as e:
+        print(e)
         dfg=[]
     return code_tokens,dfg
 
