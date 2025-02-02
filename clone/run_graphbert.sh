@@ -5,9 +5,9 @@ python run_graphbert.py \
     --model_name_or_path=microsoft/graphcodebert-base \
     --tokenizer_name=microsoft/graphcodebert-base \
     --do_train \
-    --train_data_file=dataset/dataset/small/train.txt \
-    --eval_data_file=dataset/dataset/small/valid.txt \
-    --test_data_file=dataset/dataset/small/test.txt \
+    --train_data_file=dataset/dataset/train.txt \
+    --eval_data_file=dataset/dataset/valid.txt \
+    --test_data_file=dataset/dataset/test.txt \
     --epoch 1 \
     --code_length 512 \
     --data_flow_length 128 \
