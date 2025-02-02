@@ -117,6 +117,7 @@ def extract_dataflow(code, parser,lang):
     if lang=="php":
         code="<?php"+code+"?>"
     # try:
+    print(parser)
     tree = parser[0].parse(bytes(code,'utf8'))
     root_node = tree.root_node
     tokens_index=tree_to_token_index(root_node)
