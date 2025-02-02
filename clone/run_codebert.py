@@ -300,9 +300,9 @@ def run():
     # Set seed
     set_seed(args)
 
-    args.config_name = r"G:\research\clone\examples\codebert-base"
-    args.tokenizer_name = r"G:\research\clone\examples\codebert-base"
-    args.model_name_or_path = r"G:\research\clone\examples\codebert-base"
+    # args.config_name = r"G:\research\clone\examples\codebert-base"
+    # args.tokenizer_name = r"G:\research\clone\examples\codebert-base"
+    # args.model_name_or_path = r"G:\research\clone\examples\codebert-base"
 
 
     config = RobertaConfig.from_pretrained(args.config_name if args.config_name else args.model_name_or_path)
