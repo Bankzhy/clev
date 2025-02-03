@@ -73,7 +73,7 @@ def train(args, train_dataset, model, tokenizer):
              inputs_ids_2, position_idx_2, attn_mask_2,
              labels) = [x.to(args.device) for x in batch]
             model.train()
-            print(labels)
+
             loss, logits = model(inputs_ids_1, position_idx_1, attn_mask_1, inputs_ids_2, position_idx_2, attn_mask_2,
                                  labels)
             if args.n_gpu > 1:
