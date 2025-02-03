@@ -1,5 +1,5 @@
 mkdir saved_models
-nohup python run_graphbert.py \
+python run_graphbert.py \
     --output_dir=saved_models \
     --config_name=microsoft/graphcodebert-base \
     --model_name_or_path=microsoft/graphcodebert-base \
@@ -16,4 +16,4 @@ nohup python run_graphbert.py \
     --learning_rate 2e-5 \
     --max_grad_norm 1.0 \
     --evaluate_during_training \
-    --seed 123456 2>&1| tee saved_models/train.log > output.log 2>&1 &
+    --seed 123456 2>&1| tee saved_models/train.log
