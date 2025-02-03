@@ -113,19 +113,19 @@ class CodeBertModel(nn.Module):
         bs, l = inputs_ids_1.size()
         inputs_ids = torch.cat((inputs_ids_1.unsqueeze(1), inputs_ids_2.unsqueeze(1)), 1).view(bs * 2, l)
         position_idx = torch.cat((position_idx_1.unsqueeze(1), position_idx_2.unsqueeze(1)), 1).view(bs * 2, l)
-        attn_mask = torch.cat((attn_mask_1.unsqueeze(1), attn_mask_2.unsqueeze(1)), 1).view(bs * 2, l, l)
+        # attn_mask = torch.cat((attn_mask_1.unsqueeze(1), attn_mask_2.unsqueeze(1)), 1).view(bs * 2, l, l)
 
         # embedding
         nodes_mask = position_idx.eq(0)
         token_mask = position_idx.ge(2)
         inputs_embeddings = self.encoder.roberta.embeddings.word_embeddings(inputs_ids)
-        nodes_to_token_mask = nodes_mask[:, :, None] & token_mask[:, None, :] & attn_mask
-        nodes_to_token_mask = nodes_to_token_mask / (nodes_to_token_mask.sum(-1) + 1e-10)[:, :, None]
-        avg_embeddings = torch.einsum("abc,acd->abd", nodes_to_token_mask, inputs_embeddings)
-        inputs_embeddings = inputs_embeddings * (~nodes_mask)[:, :, None] + avg_embeddings * nodes_mask[:, :, None]
+        # nodes_to_token_mask = nodes_mask[:, :, None] & token_mask[:, None, :] & attn_mask
+        # nodes_to_token_mask = nodes_to_token_mask / (nodes_to_token_mask.sum(-1) + 1e-10)[:, :, None]
+        # avg_embeddings = torch.einsum("abc,acd->abd", nodes_to_token_mask, inputs_embeddings)
+        # inputs_embeddings = inputs_embeddings * (~nodes_mask)[:, :, None] + avg_embeddings * nodes_mask[:, :, None]
 
         outputs = \
-        self.encoder.roberta(inputs_embeds=inputs_embeddings, attention_mask=attn_mask, position_ids=position_idx,
+        self.encoder.roberta(inputs_embeds=inputs_embeddings, position_ids=position_idx,
                              token_type_ids=position_idx.eq(-1).long())[0]
         logits = self.classifier(outputs)
         # shape: [batch_size, num_classes]
