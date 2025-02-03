@@ -89,12 +89,18 @@ class GraphBertModel(nn.Module):
         outputs = \
         self.encoder.roberta(inputs_embeds=inputs_embeddings, attention_mask=attn_mask, position_ids=position_idx,
                              token_type_ids=position_idx.eq(-1).long())[0]
+        print("outputs")
+        print(outputs)
         logits = self.classifier(outputs)
         # shape: [batch_size, num_classes]
         prob = F.softmax(logits, dim=-1)
+        print("prob")
+        print(prob)
         if labels is not None:
             loss_fct = CrossEntropyLoss()
             loss = loss_fct(logits, labels)
+            print("loss")
+            print(loss)
             return loss, prob
         else:
             return prob
