@@ -80,6 +80,8 @@ class GraphBertModel(nn.Module):
         # embedding
         nodes_mask = position_idx.eq(0)
         token_mask = position_idx.ge(2)
+        print("inputs_ids")
+        print(inputs_ids)
         inputs_embeddings = self.encoder.roberta.embeddings.word_embeddings(inputs_ids)
         print("inputs_embeddings")
         print(inputs_embeddings)
