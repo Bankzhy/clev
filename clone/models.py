@@ -80,18 +80,11 @@ class GraphBertModel(nn.Module):
         # embedding
         nodes_mask = position_idx.eq(0)
         token_mask = position_idx.ge(2)
-        print("inputs_ids")
-        print(inputs_ids)
         inputs_embeddings = self.encoder.roberta.embeddings.word_embeddings(inputs_ids)
-        print("inputs_embeddings")
-        print(inputs_embeddings)
         nodes_to_token_mask = nodes_mask[:, :, None] & token_mask[:, None, :] & attn_mask
         nodes_to_token_mask = nodes_to_token_mask / (nodes_to_token_mask.sum(-1) + 1e-10)[:, :, None]
         avg_embeddings = torch.einsum("abc,acd->abd", nodes_to_token_mask, inputs_embeddings)
         inputs_embeddings = inputs_embeddings * (~nodes_mask)[:, :, None] + avg_embeddings * nodes_mask[:, :, None]
-        print("inputs_embeddings2")
-        print(inputs_embeddings)
-
         outputs = \
         self.encoder.roberta(inputs_embeds=inputs_embeddings, attention_mask=attn_mask, position_ids=position_idx,
                              token_type_ids=position_idx.eq(-1).long())[0]

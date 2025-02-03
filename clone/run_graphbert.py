@@ -309,7 +309,9 @@ def run():
     config.num_labels = 1
     tokenizer = RobertaTokenizer.from_pretrained(args.tokenizer_name)
     model = AutoModelForMaskedLM.from_pretrained(args.model_name_or_path, config=config)
-
+    print(config)
+    print(tokenizer)
+    print(model)
     model=GraphBertModel(model,config,tokenizer,args)
     logger.info("Training/evaluation parameters %s", args)
 
