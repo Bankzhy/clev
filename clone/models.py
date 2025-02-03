@@ -77,6 +77,11 @@ class GraphBertModel(nn.Module):
         position_idx = torch.cat((position_idx_1.unsqueeze(1), position_idx_2.unsqueeze(1)), 1).view(bs * 2, l)
         attn_mask = torch.cat((attn_mask_1.unsqueeze(1), attn_mask_2.unsqueeze(1)), 1).view(bs * 2, l, l)
 
+        print("re input")
+        print(inputs_ids)
+        print(position_idx)
+        print(attn_mask)
+
         # embedding
         nodes_mask = position_idx.eq(0)
         token_mask = position_idx.ge(2)
@@ -89,18 +94,12 @@ class GraphBertModel(nn.Module):
         outputs = \
         self.encoder.roberta(inputs_embeds=inputs_embeddings, attention_mask=attn_mask, position_ids=position_idx,
                              token_type_ids=position_idx.eq(-1).long())[0]
-        print("outputs")
-        print(outputs)
         logits = self.classifier(outputs)
         # shape: [batch_size, num_classes]
         prob = F.softmax(logits, dim=-1)
-        print("prob")
-        print(prob)
         if labels is not None:
             loss_fct = CrossEntropyLoss()
             loss = loss_fct(logits, labels)
-            print("loss")
-            print(loss)
             return loss, prob
         else:
             return prob
